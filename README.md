@@ -1,2 +1,2 @@
 # CSharp
-https://csharp.janjanousek.cz/cv1/
+https://csharp.janjanousek.cz
