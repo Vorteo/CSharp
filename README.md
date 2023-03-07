@@ -1,2 +1,2 @@
 # CSharp
-https://csharp.janjanousek.cz
+Link na cviceni: https://csharp.janjanousek.cz
