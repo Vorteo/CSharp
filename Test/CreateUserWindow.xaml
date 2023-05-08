@@ -1,0 +1,24 @@
+﻿<Window x:Class="WpfApp1.CreateUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Create Customer" Height="271" Width="400">
+    <StackPanel Margin="10">
+        <DockPanel Margin="10">
+            <Label Content="Jméno: "/>
+            <TextBox x:Name="fnameBox" Text="{Binding FirstName}" Width="160" Margin="20,0,0,0" HorizontalAlignment="Left"/>
+        </DockPanel>
+        <DockPanel Margin="10">
+            <Label Content="Příjmení: "/>
+            <TextBox x:Name="lnameBox" Text="{Binding LastName}" Width="160" Margin="20,0,0,0" HorizontalAlignment="Left"/>
+        </DockPanel>
+        <DockPanel Margin="10">
+            <Label Content="Věk: "/>
+            <TextBox x:Name="ageBox" Text="{Binding Age}" Width="60" Margin="20,0,0,0" HorizontalAlignment="Left"/>
+        </DockPanel>
+        <Button Content="Přidat" Click="AddCustomer" Margin="40 10 40 10" Height="30"/>
+    </StackPanel>
+</Window>
