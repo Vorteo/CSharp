@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Seznam produktů";
+    Product p = ViewBag.Product as Product;
+}
+<h1>@p.Name</h1>
+<div>
+    <img src="@p.Photo"/>
+    <p>Cena: @p.Price Kč</p>
+    <a href="@Url.Action("AddToCart", new {id = p.Id})"><button>Přidat do košíku</button></a>
+    <p>@p.Description</p>
+</div>

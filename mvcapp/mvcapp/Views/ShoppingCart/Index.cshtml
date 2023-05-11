@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Objednávka";
+}
+@model ShoppingCartForm
+<h1>Košík</h1>
+
+@using(Html.BeginForm())
+{
+    <p>
+        @Html.LabelFor(x => x.Name)
+        @Html.TextBoxFor(x => x.Name)
+        @Html.ValidationMessageFor(x => x.Name)
+    </p>
+    <p>
+        @Html.LabelFor(x => x.Email)
+        @Html.TextBoxFor(x => x.Email)
+        @Html.ValidationMessageFor(x => x.Email)
+    </p>
+    <p>
+        @Html.LabelFor(x => x.Address)
+        @Html.TextBoxFor(x => x.Address)
+        @Html.ValidationMessageFor(x => x.Address)
+    </p>
+      <p>
+        @Html.LabelFor(x => x.Age)
+        @Html.TextBoxFor(x => x.Age)
+        @Html.ValidationMessageFor(x => x.Age)
+    </p>
+
+    <button type="submit">Odeslat</button>
+}

@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Seznam produktů";
+    List<Product> products = ViewBag.Products as List<Product>;
+}
+<h1>Seznam produktů</h1>
+<div>
+    <ul>
+    @foreach(Product p in products)
+    {
+        <li>
+            <a href="@Url.Action("Detail", new { id = p.Id})">@(p.Name + ", Cena: " + p.Price + " Kč")</a>
+        </li>
+    }
+    </ul>
+</div>
