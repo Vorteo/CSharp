@@ -1,0 +1,29 @@
+﻿<Window x:Class="testt.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:testt"
+        mc:Ignorable="d"
+        Title="Kurzy" Height="450" Width="800">
+    <Grid Margin="20">
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Kurzy}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="1*" Header="Země" Binding="{Binding country}"/>
+                <DataGridTextColumn Width="1*" Header="Měna" Binding="{Binding currency}"/>
+                <DataGridTextColumn Width="1*" Header="Množství" Binding="{Binding count}"/>
+                <DataGridTextColumn Width="1*" Header="Kod" Binding="{Binding code}"/>
+                <DataGridTextColumn Width="1*" Header="Kurz" Binding="{Binding exchangeRate}"/>
+                <DataGridTemplateColumn Header="Action" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Button Content="Směnit" Click="ExchangeButton"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
