@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Správa Uživatelů";
+    List<User> users = ViewBag.Users as List<User>;
+}
+
+<div class="text-center">
+    <h1 class="display-5">Seznam uživatelů</h1>
+</div>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        <label for="selectoption">Vyberte Možnost: </label>
+        <select id="SelectOption" name="SelectOption">
+            <option value="email">Email </option>
+            <option value="name">Jméno </option>
+        </select>
+        <br>
+        <br>
+         <div class="col-sm-3">
+            <select id="SelectOption2" name="SelectOption2">
+                <option value="1">Administrátor </option>
+                <option value="2">Pracovník</option>
+                <option value="3">Zákazník</option>
+                <option value="0">Vše</option>
+            </select>
+        </div>
+        <br>
+        <br>
+        @Html.TextBox("SearchText")
+        <input type="submit" class="btn btn-primary" value="Vyhledat">
+    }
+</div>
+<div class="text-right">
+    <a href="@(Url.Action("CreateUser", "Home"))"><button type="button" class="btn btn-success">Přidat uživatele</button></a>
+</div>
+<br />
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Jméno</th>
+            <th scope="col">Příjmení</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">Typ uživatele</th>
+            <th scope="col">Datum vytvoření</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (User u in users)
+        {
+            <tr>
+                <th scope="row">@u.id</th>
+                <td>@u.fName</td>
+                <td>@u.lName</td>
+                <td>@u.email</td>
+                <td>@u.phone</td>
+                @switch(u.type)
+                {
+                    case 1:
+                        {
+                            <td>Administrátor</td>
+                        }
+                        break;
+                   case 2:
+                        {
+                            <td>Pracovník prodejny</td>
+                        }
+                        break;
+                  case 3:
+                        {
+                            <td>Zákazník</td>
+                        }
+                        break;
+                }          
+                <td>@u.dateOfCreation</td>
+                <td>
+                    <a href="@(Url.Action("UserDetail", "Home", new {id = u.id}))"><button type="button" class="btn btn-primary">Upravit</button></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

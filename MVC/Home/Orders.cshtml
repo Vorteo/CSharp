@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Správa objednávek";
+    List<Orders> orders = ViewBag.Orders as List<Orders>;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Správa objednávek</h1>
+</div>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">číslo objednávky</th>
+            <th scope="col">Datum vytvoření / zpracování</th>
+            <th scope="col">Stav</th>
+            <th scope="col">Celková cena</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Orders o in orders)
+        {
+            <tr>
+                <th scope="row">@o.id</th>
+                <td>@o.dateOfCreation</td>          
+                <td>@o.state</td> 
+                <td>@o.totalPrice</td>
+                <td>
+                    <a href="@(Url.Action("OrderDetail", "Home", new {id = o.id}))"><button type="button" class="btn btn-primary">Upravit</button></a>
+                    @if (o.state != "Cancelled")
+                    {
+                        <a href="@(Url.Action("DeleteOrders", "Home", new {id = o.id}))"><button type="button" class="btn btn-danger">Smazat</button></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

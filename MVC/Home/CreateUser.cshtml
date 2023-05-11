@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Vytvoření uživatele";
+}
+@model projekt.Models.Forms.CreateUserForm
+
+<div class="text-center">
+    <h1 class="display-4">Vytvoření uživatele</h1>
+</div>
+@using (Html.BeginForm("CreateUser", "Home", FormMethod.Post))
+{
+    <fieldset>
+        @Html.ValidationSummary(true)
+        @if(ViewBag.Message != null)
+        {
+          <div style="border: 1px solid red">
+              @ViewBag.Message
+          </div>  
+        }
+        <table>
+            <tr><td>Údaje</td></tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.user.fName)</td>
+                <td>@Html.TextBoxFor(x => x.user.fName)</td>
+                <td>@Html.ValidationMessageFor(x => x.user.fName)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.user.lName)</td>
+                <td>@Html.TextBoxFor(x => x.user.lName)</td>
+                <td>@Html.ValidationMessageFor(x => x.user.lName)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.user.email)</td>
+                <td>@Html.TextBoxFor(x => x.user.email)</td>
+                <td>@Html.ValidationMessageFor(x => x.user.email)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.user.phone)</td>
+                <td>@Html.TextBoxFor(x => x.user.phone)</td>
+                <td>@Html.ValidationMessageFor(x => x.user.phone)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.user.password)</td>
+                <td>@Html.PasswordFor(x => x.user.password)</td>
+                <td>@Html.ValidationMessageFor(x => x.user.password)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.user.type)</td>
+                <td>@Html.DropDownListFor(x => x.user.type, (List<SelectListItem>)ViewBag.Options)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.address.street)</td>
+                <td>@Html.TextBoxFor(x => x.address.street)</td>
+                <td>@Html.ValidationMessageFor(x => x.address.street)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.address.city)</td>
+                <td>@Html.TextBoxFor(x => x.address.city)</td>
+                <td>@Html.ValidationMessageFor(x => x.address.city)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.address.postalCode)</td>
+                <td>@Html.TextBoxFor(x => x.address.postalCode)</td>
+                <td>@Html.ValidationMessageFor(x => x.address.postalCode)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.address.country)</td>
+                <td>@Html.TextBoxFor(x => x.address.country)</td>
+                <td>@Html.ValidationMessageFor(x => x.address.country)</td>
+            </tr>
+                  
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Vytvořit"/></td>
+                <td>
+                        <a href="@Url.Action("Users", "Home")"><button class="btn-primary" type="button">Zpět</button></a>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}

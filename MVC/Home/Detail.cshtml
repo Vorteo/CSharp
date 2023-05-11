@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Produkt";
+    Product product = ViewBag.Product as Product;
+    string category = ViewBag.Category as string;
+}
+@model projekt.Models.Forms.CartItemForm
+
+<div class="text-center">
+    <h1 class="display-4"> Produkt</h1>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">           
+            <h2 class="card-title">@product.name</h2>
+            <div class="row">         
+                <div class="col-lg-7 col-md-7 col-sm-6 mt-2">
+                    <h5 class="box-title">Popis produktu:</h5>
+                    <p>@product.description</p>
+                    <p><strong>Kategorie: </strong>@category</p>
+                    <p><strong>Počet kusů: </strong>@product.quantity</p>
+                    <h2 class="mt-2">
+                        Cena: @product.price Kč
+                    </h2>
+                    <h6>Množství :</h6>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.HiddenFor(x => x.productId)
+                        @Html.HiddenFor(x => x.productName)
+
+                         @Html.TextBoxFor(x => x.count)
+                         @Html.ValidationMessageFor(x => x.count)
+                         <button class="btn btn-primary btn-rounded" type="submit">Přidat do košíku</button>  
+                    }      
+                     <br>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h3 class="box-title mt-2">Detailní popis:</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-product">
+                            <tbody>
+                                <tr>
+                                    <td width="390">Výrobce</td>
+                                    <td>@product.manufacturer</td>
+                                </tr>
+                                <tr>
+                                    <td>Barva</td>
+                                    <td>@product.colour</td>
+                                </tr>
+                                <tr>
+                                    <td>Hmotnost</td>
+                                    <td>@product.weight g</td>
+                                </tr>                                                                                           
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

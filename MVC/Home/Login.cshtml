@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+@model projekt.Models.User
+
+<div class="text-center">
+    <h1 class="display-4">Přihlášení</h1>
+</div>
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <fieldset>
+        <legend>Přihlášení</legend>
+
+        @Html.ValidationSummary(true)
+        @if(@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <table>
+            <tr>
+                <td>@Html.LabelFor(x => x.email)</td>
+                <td>@Html.TextBoxFor(x => x.email)</td>
+                <td>@Html.ValidationMessageFor(x => x.email)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.password)</td>
+                <td>@Html.PasswordFor(x => x.password)</td>
+                <td>@Html.ValidationMessageFor(x => x.password)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" class="btn-primary btn" value="Přihlásit se"/></td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+    <a href="@Url.Action("Register", "Home")">Nemáte účet? Zde se zaregisrujte.</a>
+}

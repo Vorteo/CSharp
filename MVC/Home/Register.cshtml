@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+@model projekt.Models.Forms.RegisterUserForm
+
+
+<div class="text-center">
+    <h1 class="display-4">Registrace</h1>
+</div>
+@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+{
+    <fieldset>
+        @Html.ValidationSummary(true)
+        @if(@ViewBag.Message != null)
+        {
+          <div style="border: 1px solid red">
+              @ViewBag.Message
+          </div>  
+        }
+        <table>
+            <tr><td>Osobní údaje</td></tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.fName)</td>
+                <td>@Html.TextBoxFor(x => x.fName)</td>
+                <td>@Html.ValidationMessageFor(x => x.fName)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.lName)</td>
+                <td>@Html.TextBoxFor(x => x.lName)</td>
+                <td>@Html.ValidationMessageFor(x => x.lName)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.email)</td>
+                <td>@Html.TextBoxFor(x => x.email)</td>
+                <td>@Html.ValidationMessageFor(x => x.email)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.phone)</td>
+                <td>@Html.TextBoxFor(x => x.phone, new { placeholder = "xxx xxx xxx xxx" })</td>
+                <td>@Html.ValidationMessageFor(x => x.phone)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.password)</td>
+                <td>@Html.PasswordFor(x => x.password)</td>
+                <td>@Html.ValidationMessageFor(x => x.password)</td>
+            </tr>
+
+            <tr><td><h4>Adresa</h4></td></tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.street)</td>
+                <td>@Html.TextBoxFor(x => x.street)</td>
+                <td>@Html.ValidationMessageFor(x => x.street)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.city)</td>
+                <td>@Html.TextBoxFor(x => x.city)</td>
+                <td>@Html.ValidationMessageFor(x => x.city)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.postalCode)</td>
+                <td>@Html.TextBoxFor(x => x.postalCode, new { placeholder = "xxx xx"})</td>
+                <td>@Html.ValidationMessageFor(x => x.postalCode)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.country)</td>
+                <td>@Html.TextBoxFor(x => x.country)</td>
+                <td>@Html.ValidationMessageFor(x => x.country)</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" class="btn btn-primary" value="Registrovat se"/></td>
+            </tr>
+        </table>
+    </fieldset>
+    <a href="@Url.Action("Login", "Home")">Již máte účet? Přihlásit se.</a>
+}

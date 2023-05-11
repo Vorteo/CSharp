@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Detail objednávky";
+    Orders order = ViewBag.Order as Orders;
+}
+@model projekt.Models.Forms.EditOrderForm
+
+<div class="text-center">
+    <h1 class="display-4">Detail objednávky</h1>
+</div>
+<div class=container>
+    <a href="@Url.Action("Orders", "Home")"><button class="btn-primary btn" type="button">Zpět</button></a>
+</div>
+<br />
+<div class="container">
+
+    
+    @using (Html.BeginForm("OrderDetail", "Home", FormMethod.Post))
+    {
+        <fieldset>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @if (@ViewData["Message"] != null)
+            {
+                <div style="border: 1px solid red">
+                    @ViewData["Message"]
+                </div>
+            }
+            <table>
+                <tr>
+                    @Html.HiddenFor(x => x.fName)
+                    <td>@Html.LabelFor(x => x.fName)</td>
+                    <td>@Html.TextBoxFor(x => x.fName, new { disabled = "disabled"})</td>
+                    <td>@Html.ValidationMessageFor(x => x.fName)</td>
+                </tr>
+                 <tr>
+                     @Html.HiddenFor(x => x.lName)
+                    <td>@Html.LabelFor(x => x.lName)</td>
+                    <td>@Html.TextBoxFor(x => x.lName, new { disabled = "disabled"})</td>
+                    <td>@Html.ValidationMessageFor(x => x.lName)</td>
+                </tr>
+                 <tr>
+                    <td>@Html.LabelFor(x => x.state)</td>
+                     <td>@Html.DropDownListFor( x => x.state, (List<SelectListItem>)ViewBag.States)</td>
+                </tr> 
+                
+                  <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="p-2 px-3 text-uppercase">Název produktu</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Počet</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              @for (int i = 0; i< Model.items.Count;i++)
+              {
+                  @Html.HiddenFor(x => x.items[i].productId)
+                  @Html.HiddenFor(x => x.items[i].productName)
+                   @Html.HiddenFor(x => x.items[i].count)
+                <tr>          
+                    <td>@Html.TextBoxFor(x => x.items[i].productName, new { disabled = "disabled"})</td>
+                    <td>@Html.TextBoxFor(x => x.items[i].count, new { disabled = "disabled"})</td>
+                </tr>
+               }
+              </tbody>
+            </table>      
+          </div>
+                <div class="text-right">
+                  <tr>
+                    <td>@Html.LabelFor(x => x.totalPrice)</td>
+                    <td>@Html.TextBoxFor(x => x.totalPrice,  new { disabled = "disabled"})</td>
+                    <td>@Html.ValidationMessageFor(x => x.totalPrice) Kč</td>
+                </tr>
+                </div>
+                <div class="text-right">
+                     <td>             
+                        <input type="submit" value="Uložit" class="btn btn-success"/>
+                    </td>  
+                </div>
+            </table>
+        </fieldset>
+    }
+</div>

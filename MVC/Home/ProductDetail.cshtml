@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Detail produktu";
+}
+
+@model Product
+
+<div class="text-center">
+    <h1 class="display-4">Detail produktu</h1>
+</div>
+
+<div class="container">
+    @using (Html.BeginForm("ProductDetail", "Home", FormMethod.Post))
+    {
+        <fieldset>
+            <legend>Editace produktu</legend>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @if (@ViewData["Message"] != null)
+            {
+                <div style="border: 1px solid red">
+                    @ViewData["Message"]
+                </div>
+            }
+            <table>
+                <tr>
+                    <td>@Html.LabelFor(x => x.name)</td>
+                    <td>@Html.TextBoxFor(x => x.name)</td>
+                    <td>@Html.ValidationMessageFor(x => x.name)</td>
+                </tr>
+                 <tr>
+                    <td>@Html.LabelFor(x => x.manufacturer)</td>
+                    <td>@Html.TextBoxFor(x => x.manufacturer)</td>
+                    <td>@Html.ValidationMessageFor(x => x.manufacturer)</td>
+                </tr>
+                 <tr>
+                    <td>@Html.LabelFor(x => x.description)</td>
+                    <td>@Html.TextBoxFor(x => x.description)</td>
+                    <td>@Html.ValidationMessageFor(x => x.description)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x => x.colour)</td>
+                    <td>@Html.TextBoxFor(x => x.colour)</td>
+                    <td>@Html.ValidationMessageFor(x => x.colour)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x => x.weight)</td>
+                    <td>@Html.TextBoxFor(x => x.weight)</td>
+                    <td>@Html.ValidationMessageFor(x => x.weight)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x => x.price)</td>
+                    <td>@Html.TextBoxFor(x => x.price)</td>
+                    <td>@Html.ValidationMessageFor(x => x.price)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x => x.quantity)</td>
+                    <td>@Html.TextBoxFor(x => x.quantity)</td>
+                    <td>@Html.ValidationMessageFor(x => x.quantity)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x => x.isActive)</td>
+                    <td>@Html.DropDownListFor( x => x.isActive, (List<SelectListItem>)ViewBag.Options)</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Editovat" class="btn btn-success"/>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Products", "Home")"><button class="btn-primary btn" type="button">Zpět</button></a>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+    }
+</div>

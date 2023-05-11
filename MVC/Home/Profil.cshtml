@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Profil";
+    User user = ViewData["user"] as User;
+    List<Orders> orders = ViewBag.Orders as List<Orders>;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Profil</h1>
+</div>
+
+<div class="container, row">
+    <div class="col">
+        <p><strong>Jméno: </strong> @user.fName</p>
+        <p><strong>Příjmení: </strong> @user.lName</p>
+        <p><strong>Email: </strong> @user.email</p>
+        <p><strong>Telefon: </strong> @user.phone</p>
+        @switch (user.type)
+        {
+            case 1:
+                {
+                    <p><strong>Typ účtu: </strong> Administrátor</p>
+                }
+                break;
+            case 2:
+                {
+                   <p><strong>Typ účtu: </strong> Pracovník prodejny</p> 
+                }
+                break;
+            case 3:
+                {
+                   <p><strong>Typ účtu: </strong> Zákazník</p> 
+                }
+                break;
+        }
+    </div>
+    <div>
+        <h4>Historie objednávek</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Datum</th>
+                  <th scope="col">Stav</th>
+                  <th scope="col">Celková cena</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int i = 0;}
+                @foreach(Orders o in orders)
+                {
+                    i += 1;
+                    <tr>
+                  <th scope="row">@i</th>
+                  <td>@o.dateOfCreation</td>
+                  <td>@o.state</td>
+                  <td>@o.totalPrice</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

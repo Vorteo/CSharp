@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Správa produktů";
+    List<Product> products = ViewBag.Products as List<Product>;
+}
+@model projekt.Models.Forms.Sort
+
+<div class="text-center">
+    <h1 class="display-4">Správa produktů</h1>
+    <br>
+    <br>
+</div>
+    <div class="form-group">
+       @using (Html.BeginForm("Products", "Home", FormMethod.Post))
+        {
+            
+              <div class="input-group">
+                  @Html.TextBoxFor(x => x.searchText, new {@class="input-rounded form-control"})
+                <input type="submit" class="btn-primary btn" value="Vyhledat"/>
+            </div>
+             <br>
+             <div class="col-sm-3">
+                <p>@Html.RadioButtonFor(x => x.sortByProperty, "active") Aktivních</p>
+                <label for="selectoption"><strong>Setřídit podle: </strong></label>
+                <p>@Html.RadioButtonFor(x => x.sortByProperty, "quantity")Počtu kusů</p>
+                <p>@Html.RadioButtonFor(x => x.sortByProperty, "price") Ceny</p>
+            </div>
+            <div class="col-sm-3">
+                @Html.DropDownListFor(x => x.orderBy, (List<SelectListItem>)ViewBag.Options, new { @class="form-control"})
+            </div>
+        }
+    </div>
+<div class="text-right">
+ <a href="@(Url.Action("CreateProduct", "Home"))"><button type="button" class="btn btn-success">Přidat produkt</button></a>
+ </div>
+ <br>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Název</th>
+            <th scope="col">Výrobce</th>
+            <th scope="col">Popis</th>
+            <th scope="col">Barva</th>
+            <th scope="col">Váha</th>
+            <th scope="col">Cena</th>
+            <th scope="col">Počet</th>
+            <th scope="col">Aktivní</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Product p in products)
+        {
+            <tr>
+                <th scope="row">@p.id</th>
+                <td>@p.name</td>
+                <td>@p.manufacturer</td>
+                <td>@p.description</td>
+                <td>@p.colour</td>
+                <td>@p.weight</td>
+                <td>@p.price</td>
+                <td>@p.quantity</td>              
+                @switch(p.isActive)
+                {
+                    case 0:
+                        {
+                            <td>Ne</td>
+                        }
+                        break;
+                   case 1:
+                        {
+                            <td>Ano</td>
+                        }
+                        break;              
+                }                      
+                <td>
+                    <a href="@(Url.Action("ProductDetail", "Home", new {id = p.id}))"><button type="button" class="btn btn-primary">Upravit</button></a>
+                    @if (p.isActive == 1)
+                    {
+                        <a href="@(Url.Action("DeleteProduct", "Home", new {id = p.id}))"><button type="button" class="btn btn-danger mt-2">Smazat</button></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Vytvoření produktu";
+}
+@model projekt.Models.Forms.CreateProductForm
+
+<div class="text-center">
+    <h1 class="display-4">Vytvoření produktu</h1>
+</div>
+@using (Html.BeginForm("CreateProduct", "Home", FormMethod.Post))
+{
+    <fieldset>
+        @Html.ValidationSummary(true)
+        @if(@ViewBag.Message != null)
+        {
+          <div style="border: 1px solid red">
+              @ViewBag.Message
+          </div>  
+        }
+        <table>
+            <tr><td>Údaje</td></tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.product.name)</td>
+                <td>@Html.TextBoxFor(x => x.product.name)</td>
+                <td>@Html.ValidationMessageFor(x => x.product.name)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.product.manufacturer)</td>
+                <td>@Html.TextBoxFor(x => x.product.manufacturer)</td>
+                <td>@Html.ValidationMessageFor(x => x.product.manufacturer)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.product.description)</td>
+                <td>@Html.TextAreaFor(x => x.product.description)</td>
+                <td>@Html.ValidationMessageFor(x => x.product.description)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.product.colour)</td>
+                <td>@Html.TextBoxFor(x => x.product.colour)</td>
+                <td>@Html.ValidationMessageFor(x => x.product.colour)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.product.weight)</td>
+                <td>@Html.TextBoxFor(x => x.product.weight)</td>
+                <td>@Html.ValidationMessageFor(x => x.product.weight)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.product.price)</td>
+                <td>@Html.TextBoxFor(x => x.product.price)</td>
+                <td>@Html.ValidationMessageFor(x => x.product.price)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.product.quantity)</td>
+                <td>@Html.TextBoxFor(x => x.product.quantity)</td>
+                <td>@Html.ValidationMessageFor(x => x.product.quantity)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.product.isActive)</td>
+                <td>
+                        <span>Ano </span>@Html.RadioButtonFor(x => x.product.isActive,"1")
+                </td>
+                <td>
+                        <span>Ne </span>@Html.RadioButtonFor(x => x.product.isActive,"0")
+                </td>
+            </tr>
+            <tr><td>Kategorie</td></tr>
+            <tr>
+                <td>@Html.DropDownListFor( x => x.catId, (List<SelectListItem>)ViewBag.Options)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Vytvořit"/></td>
+                <td>
+                        <a href="@Url.Action("Products", "Home")"><button class="btn-primary" type="button">Zpět</button></a>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}

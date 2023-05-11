@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    List<Product> products = ViewBag.Products as List<Product>;
+}
+@model projekt.Models.Forms.Sort
+
+<div class="text-center">
+    <h1 class="display-5">Úvodní stránka</h1>
+</div>
+
+<div class=container>
+     <div class="form-group">
+       @using (Html.BeginForm(("Homepage", "Home", FormMethod.Post)))
+       {
+             <div class="input-group">
+                @Html.TextBoxFor(x => x.searchText, new {@class="input-rounded form-control"})
+                <input type="submit" class="btn-primary btn" value="Vyhledat"/>
+            </div>
+            <br />
+             <div class="col-sm-3">
+                <label for="selectoption">Setřídit podle: </label>
+                <p>@Html.RadioButtonFor(x => x.sortByProperty, "price") Ceny</p>
+                <p>@Html.RadioButtonFor(x => x.sortByProperty, "quantity")Počtu kusů</p>
+            </div> 
+            <div class="col-sm-3">
+             @Html.DropDownListFor(x => x.orderBy, (List<SelectListItem>)ViewBag.Options)
+            </div>
+       }
+    </div>
+     <br>
+        <br>
+    <div class="row">
+ 
+        @foreach(var product in products)
+        {
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">  
+                <div class="card-body">
+                    <h5 class="card-title">@product.name</h5>
+                    <p class="card-text">@product.description</p>
+                    <p class="card-text"><strong>Počet kusů:</strong> @product.quantity</p>
+                    <p class="card-text"><strong>Cena:</strong> @product.price Kč</p>
+                    @if (product.quantity >= 1)
+                    {
+                            <a href="@Url.Action("Detail", "Home", new { id = product.id})"><button class="btn-primary btn" type="button">Zobrazit</button></a>
+                    }
+                    else
+                    {
+                             <p class="card-text"><strong>Momentálně nedostupný</strong></p>
+                    }
+                    </div>
+              </div>   
+            </div> 
+        }                   
+    </div>
+</div>                     

@@ -1,0 +1,65 @@
+﻿@using projekt.Models.Forms
+@{
+    ViewData["Title"] = "Košík";
+    List<CartItemForm> items = ViewBag.kosik as List<CartItemForm>;
+}
+@model OrderForm
+
+<div class="text-center">
+    <h1 class="display-4">Košík</h1>
+</div>
+<div class=container mt-2>
+    <div> 
+        <a href="@Url.Action("Homepage", "Home")"><button class="btn-primary btn" type="button">Zpět</button></a>
+        <a href="@(Url.Action("ClearShoppingCart", "Home"))"><button type="button" class="btn btn-danger float-right">Smazat košík</button></a>
+    </div>
+    
+</div>
+
+@if(ViewBag.kosik == null)
+{
+    <p>Košík je prázdný.</p>
+}
+else
+{
+    <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="p-2 px-3 text-uppercase">Název produktu</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Počet</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Cena</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              @foreach(CartItemForm item in items)
+              {
+                <tr>
+                  <th scope="row" class="border-0">
+                    <div class="p-2">
+                      <div class="ml-3 d-inline-block align-middle">
+                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle"></a>@item.productName</h5>
+                      </div>
+                    </div>
+                  </th>
+                  <td class="border-0 align-middle"><strong>@item.count</strong></td>
+                </tr>
+               }
+              </tbody>
+            </table>      
+          </div>
+}
+@if (ViewBag.kosik != null)
+{
+    @using (Html.BeginForm("ShoppingCart","Home", FormMethod.Post))
+    {
+            @Html.DropDownListFor(x => x.id, (List<SelectListItem>)ViewBag.Users)     
+            <button type="submit" class="btn btn-success">Dokončit objednávku</button>
+    }
+}
